@@ -384,73 +384,59 @@
 .feature-row:nth-child(odd) {
   animation-delay: 0.4s;
 }
-[data-theme="dark"] .featured-blogs {
+[data-theme="dark"] .featured-blogs,
+[data-theme="dark"] .leadership-section {
   background-color: #121212;
 }
 
 [data-theme="dark"] .section-title {
-  color: #ffffff;
-}
-
-[data-theme="dark"] .feature-text h3 {
-  color: #4dabf7; /* Light blue heading */
-}
-
-[data-theme="dark"] .feature-text p {
-  color: #cccccc; /* Light gray text */
-}
-
-[data-theme="dark"] .feature-link {
-  color: #4dabf7;
-}
-
-[data-theme="dark"] .feature-link:hover {
-  color: #82caff;
-}
-
-[data-theme="dark"] .feature-image img {
-  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.05);
-}
-
-[data-theme="dark"] .blog-card {
-  background-color: #1e1e1e;
   color: #e0e0e0;
-  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.05);
 }
 
-[data-theme="dark"] .blog-card:hover {
-  box-shadow: 0 20px 40px rgba(255, 255, 255, 0.1);
-}
-
-[data-theme="dark"] .read-more {
+[data-theme="dark"] .feature-text h3,
+[data-theme="dark"] .leadership-text h3 {
   color: #4dabf7;
 }
 
+[data-theme="dark"] .feature-text p,
+[data-theme="dark"] .leadership-text p {
+  color: #cccccc;
+}
+
+[data-theme="dark"] .feature-link,
+[data-theme="dark"] .read-more {
+  color: #4dabf7 !important;
+}
+
+[data-theme="dark"] .feature-link:hover,
 [data-theme="dark"] .blog-card:hover .read-more {
-  color: #82caff;
+  color: #82caff !important;
+}
+
+[data-theme="dark"] .feature-image img,
+[data-theme="dark"] .blog-card,
+[data-theme="dark"] .leadership-item img {
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.05);
 }
 
 [data-theme="dark"] .blog-card,
-[data-theme="dark"] .blog-card h3,
-[data-theme="dark"] .blog-card p,
-[data-theme="dark"] .read-more {
+[data-theme="dark"] .leadership-item {
+  background-color: #1e1e1e;
   color: #e0e0e0 !important;
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.05);
 }
 
 [data-theme="dark"] .blog-card h3 {
   color: #4dabf7 !important;
 }
 
-[data-theme="dark"] .read-more {
-  color: #4dabf7 !important;
+[data-theme="dark"] .blog-card:hover {
+  box-shadow: 0 20px 40px rgba(255, 255, 255, 0.1);
 }
 
-
-
-
-
-
-
+[data-theme="dark"] .leadership-item:hover {
+  box-shadow: 0 12px 28px rgba(255, 255, 255, 0.08);
+}
 
 /* Prevent horizontal scrollbar globally */
 html, body {
@@ -542,7 +528,7 @@ html, body {
 }
 
 [data-theme="dark"] .section-title {
-  color: #ffffff;
+  color: #fdfdfd;
 }
 
 [data-theme="dark"] .leadership-item {

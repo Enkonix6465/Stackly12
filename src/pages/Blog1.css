@@ -45,8 +45,8 @@
 
 body.dark-theme .cybersecurity-ways .way {
   background-color: #1c1c1c;
-  color: #f5f5f5;
-  border-left-color: #66b2ff;
+  color: #e0e0e0;
+  border-left-color: #4dabf7;
 }
 
 body.dark-theme .cybersecurity-ways .way:hover {
@@ -55,17 +55,17 @@ body.dark-theme .cybersecurity-ways .way:hover {
 }
 
 body.dark-theme .cybersecurity-ways .way h3 {
-  color: #f5f5f5;
+  color: #e0e0e0;
 }
 
 body.dark-theme .cybersecurity-ways .way:hover h3 {
-  color: #66b2ff;
+  color: #82caff;
 }
 
 body.dark-theme .cybersecurity-ways .way p {
-  color: #ccc;
+  color: #cccccc;
 }
 
 body.dark-theme .cybersecurity-ways .way:hover p {
-  color: #a3d5ff;
+  color: #82caff;
 }

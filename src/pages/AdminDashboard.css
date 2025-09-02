@@ -266,46 +266,46 @@
 
 /* Dark theme styles scoped with [data-theme="dark"] on a parent element */
 
-[data-theme="dark"] .dashboard-root {
-  background: #0d1b2a; /* Dark navy background */
-  color: #82b1ff; /* Light blue text */
-}
-
-[data-theme="dark"] .stat-card {
-  background-color: #1a2e4a;
-  box-shadow: 0 4px 15px rgba(66, 165, 245, 0.7);
+[data-theme="dark"] .dashboard-root,
+.dashboard-root.dark {
+  background: #0d1b2a;
   color: #82b1ff;
 }
 
-[data-theme="dark"] .recent-logins {
+[data-theme="dark"] .stat-card,
+.dashboard-root.dark .stat-card {
   background-color: #1a2e4a;
   color: #82b1ff;
   box-shadow: 0 4px 15px rgba(66, 165, 245, 0.7);
 }
 
-[data-theme="dark"] .recent-logins tbody tr:hover {
+[data-theme="dark"] .recent-logins,
+.dashboard-root.dark .recent-logins {
+  background-color: #1a2e4a;
+  color: #82b1ff;
+  box-shadow: 0 4px 15px rgba(66, 165, 245, 0.7);
+}
+
+[data-theme="dark"] .recent-logins tbody tr:hover,
+.dashboard-root.dark .recent-logins tbody tr:hover {
   background-color: #2e477a;
   color: #82b1ff;
 }
 
-[data-theme="dark"] .chart-container {
+[data-theme="dark"] .chart-container,
+.dashboard-root.dark .chart-container {
   background-color: #1a2e4a;
   color: #82b1ff;
   box-shadow: 0 4px 15px rgba(66, 165, 245, 0.7);
 }
 
-[data-theme="dark"] .logout-btn:hover {
-  box-shadow: 0 0 18px #82b1ff;
-  background-color: #1565c0;
-}
-
-[data-theme="dark"] .dashboard-header:hover {
+[data-theme="dark"] .dashboard-header:hover,
+.dashboard-root.dark .dashboard-header:hover {
   box-shadow: 0 4px 15px rgba(66, 165, 245, 0.6);
 }
 
-[data-theme="dark"] .dashboard-root .stat-card:hover,
-[data-theme="dark"] .recent-logins:hover,
-[data-theme="dark"] .chart-container:hover {
-  box-shadow: 0 8px 25px rgba(66, 165, 245, 0.7);
-  transform: scale(1.04);
+[data-theme="dark"] .logout-btn:hover,
+.dashboard-root.dark .logout-btn:hover {
+  background-color: #1565c0;
+  box-shadow: 0 0 18px #82b1ff;
 }

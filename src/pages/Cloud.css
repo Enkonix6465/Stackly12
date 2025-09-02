@@ -211,29 +211,29 @@
 }
 /* 🌙 Dark Theme for .cloud-section */
 [data-theme="dark"] .cloud-section {
-  background: linear-gradient(to right, #121212, #1c1c1c);
+  background: linear-gradient(to right, #121212, #1e1e1e);
 }
 
 [data-theme="dark"] .cloud-content h2 {
-  color: #90caf9; /* Light blue */
+  color: #90caf9;
 }
 
 [data-theme="dark"] .cloud-content p {
-  color: #cccccc;
+  color: #ccc;
 }
 
 [data-theme="dark"] .cloud-features li {
-  color: #bbbbbb;
+  color: #bdbdbd;
 }
 
 [data-theme="dark"] .cloud-btn {
-  background: #2196f3;
-  color: #ffffff;
+  background: #64b5f6;
+  color: #121212;
 }
 
 [data-theme="dark"] .cloud-btn:hover {
-  background: #ffffff;
-  color: #0d47a1;
+  background: #fdfdfd;
+  color: #0056ff;
 }
 
 [data-theme="dark"] .cloud-image img {
@@ -409,7 +409,7 @@ h2,
 [data-theme="dark"] .timeline-icon {
   background: #64b5f6;
   color: #121212;
-  box-shadow: 0 0 0 rgba(0, 0, 0, 0); /* Reset default */
+  box-shadow: none;
 }
 
 [data-theme="dark"] .timeline-item:hover .timeline-icon {
@@ -421,7 +421,7 @@ h2,
 }
 
 [data-theme="dark"] .timeline-content p {
-  color: #bbbbbb;
+  color: #bdbdbd;
 }
 
 [data-theme="dark"] .timeline-image img {
@@ -437,7 +437,7 @@ h2,
 /*section 4 cloud benefis*/
 .cloud-benefits {
   padding: 5px 10%;
-  background: #ffffff;
+  background: #fdfdfd;
   text-align: center;
 }
 
@@ -510,7 +510,7 @@ h2,
 }
 
 [data-theme="dark"] .cloud-benefits-container h2 {
-  color: #90caf9; /* light blue */
+  color: #90caf9;
 }
 
 [data-theme="dark"] .benefits-subtitle {
@@ -523,7 +523,7 @@ h2,
 }
 
 [data-theme="dark"] .benefit-icon {
-  color: #64b5f6; /* lighter blue accent */
+  color: #64b5f6;
 }
 
 [data-theme="dark"] .benefit-card h3 {
@@ -627,11 +627,11 @@ h2,
 }
 
 [data-theme="dark"] .card h2 {
-  color: #90caf9; /* Soft blue accent */
+  color: #90caf9;
 }
 
 [data-theme="dark"] .card-content p {
-  color: #ccc; /* Lighter text for readability */
+  color: #ccc;
 }
 
 [data-theme="dark"] .card-image img {
@@ -714,7 +714,7 @@ h2,
 }
 
 [data-theme="dark"] .background-img {
-  filter: brightness(0.6); /* darkens the background image */
+  filter: brightness(0.7);
 }
 
 [data-theme="dark"] .contact-content {
@@ -723,111 +723,11 @@ h2,
 }
 
 [data-theme="dark"] .contact-content h2 {
-  color: #90caf9; /* subtle blue heading */
+  color: #90caf9;
 }
 
 [data-theme="dark"] .contact-content p {
-  color: #ccc; /* soft white text */
-}
-
-[data-theme="dark"] .cta-button {
-  border: 2px solid #ccc;
   color: #ccc;
-  background: transparent;
-}
-
-[data-theme="dark"] .cta-button:hover {
-  background: #ccc;
-  color: #000;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.contact-section {
-  position: relative;
-  padding: 10px;
-  height: 500px;
-  overflow: hidden;
-  font-family: Arial, sans-serif;
-}
-
-.background-img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 1;
-}
-
-.contact-content {
-  position: relative;
-  z-index: 2;
-  background: #fff;
-  max-width: 500px;
-  margin: 100px 40px;
-  padding: 40px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-  border-radius: 4px;
-}
-
-.contact-content h2 {
-  font-size: 26px;
-  margin-bottom: 15px;
-  color: #1e1e1e;
-}
-
-.contact-content p {
-  font-size: 16px;
-  color: #000000;
-  line-height: 1.6;
-  text-align: justify;
-  margin-bottom: 25px;
-}
-
-.cta-button {
-  display: inline-block;
-  padding: 12px 24px;
-  background-color: #0056ff;
-  border-radius: 30px;
-  text-decoration: none;
-  color: #ffffff;
-  font-weight: 500;
-  transition: all 0.3s ease;
-}
-
-.cta-button:hover {
-  background: #ffffff;
-  color: blue;
-}
-[data-theme="dark"] .contact-section {
-  background-color: #121212;
-  color: #e0e0e0;
-}
-
-[data-theme="dark"] .contact-content {
-  background: #1e1e1e;
-  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.05);
-}
-
-[data-theme="dark"] .contact-content h2 {
-  color: #90caf9; /* Soft blue heading */
-}
-
-[data-theme="dark"] .contact-content p {
-  color: #ccc; /* Light gray text */
 }
 
 [data-theme="dark"] .cta-button {
@@ -836,13 +736,8 @@ h2,
 }
 
 [data-theme="dark"] .cta-button:hover {
-  background: #ffffff;
+  background: #fdfdfd;
   color: #0056ff;
-}
-
-/* Optional: darken background image slightly */
-[data-theme="dark"] .background-img {
-  filter: brightness(0.7);
 }
 
 

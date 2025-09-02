@@ -96,9 +96,7 @@
   color: #ddd;
 }
 
-[data-theme="dark"] .contact-container {
-  /* No change needed here, grid stays the same */
-}
+
 
 [data-theme="dark"] .contact-card {
   background: #222; /* dark card background */
@@ -234,7 +232,7 @@
 }
 
 .contact-right button:hover {
-  background: #ffffff;
+  background: #fdfdfd;
   color: #007BFF;
 
 }

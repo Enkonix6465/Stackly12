@@ -1,5 +1,5 @@
 .footer {
-  background-color: #ffffff;
+  background-color: #fdfdfd;
   color: #000000;
   padding: 50px 20px 20px;
   font-family: 'Segoe UI', sans-serif;
@@ -11,15 +11,15 @@
   justify-content: space-between;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;       /* Added horizontal padding */
+  padding: 0 20px;
   gap: 40px;
 }
 
 .footer-section {
-  flex: 1 1 0;           /* Equal width for all sections */
+  flex: 1 1 0;
   min-width: 200px;
-  padding: 0 20px;       /* Equal left & right padding */
-  box-sizing: border-box; /* Include padding in width */
+  padding: 0 20px;
+  box-sizing: border-box;
 }
 
 .footer-logo {
@@ -55,19 +55,19 @@
 }
 
 .footer-section ul li a:hover {
-  color: #0077b6;  /* Changed hover color to blue */
+  color: #0077b6;
 }
 
 .footer-social a {
   margin-right: 10px;
   font-size: 20px;
-  color: #ffffff;
+  color: #fdfdfd;
   text-decoration: none;
   transition: color 0.3s;
 }
 
 .footer-social a:hover {
-  color: #0077b6;  /* Changed hover color to blue */
+  color: #0077b6;
 }
 
 .footer-contact {
@@ -81,10 +81,10 @@
   text-align: center;
   padding: 10px 20px;
   color: #000000;
-  background-color: #ffffff;
+  background-color: #fdfdfd;
 }
 
-/* Scroll to top button positioned at bottom-right corner */
+/* Scroll to top button */
 .scroll-to-top {
   position: absolute;
   right: 20px;
@@ -103,17 +103,19 @@
 .scroll-to-top:hover {
   background-color: #023e8a;
 }
-/* Add extra padding to the Logo and Description section */
+
+/* Extra padding adjustments */
 .footer-section:first-child {
-  padding-left: 40px;   /* Increase left padding */
-  padding-right: 40px;  /* Increase right padding */
+  padding-left: 40px;
+  padding-right: 40px;
 }
 
-/* Add extra padding to the Quick Links section (second .footer-section) */
 .footer-section:nth-child(2) {
-  padding-left: 40px;   /* Increase left padding */
-  padding-right: 40px;  /* Increase right padding */
+  padding-left: 40px;
+  padding-right: 40px;
 }
+
+/* Responsive */
 @media (max-width: 768px) {
   .footer-container {
     flex-direction: column;
@@ -163,55 +165,49 @@
 
   .footer-section:first-child,
   .footer-section:nth-child(2) {
-    padding: 0; /* Remove extra padding for mobile */
+    padding: 0;
   }
 }
-/* Existing Light Theme Footer CSS */
-/* ... your existing styles ... */
 
-/* Dark Theme Support */
+/* Dark Theme */
 [data-theme="dark"] .footer {
   background-color: #121212;
   color: #e0e0e0;
 }
 
-[data-theme="dark"] .footer-container {
-  /* no change needed, inherits from footer */
-}
-
 [data-theme="dark"] .footer-section {
-  border-color: transparent; /* Remove any borders if needed */
+  border-color: transparent;
   color: #e0e0e0;
 }
 
 [data-theme="dark"] .footer-section h4 {
-  color: #64b5f6; /* lighter blue for headings */
+  color: #64b5f6;
 }
 
 [data-theme="dark"] .footer-description,
 [data-theme="dark"] .footer-contact {
-  color: #ffffff; /* soft light blue-gray */
+  color: #fdfdfd;
 }
 
 [data-theme="dark"] .footer-section ul li a {
-  color: #ffffff; /* light blue links */
+  color: #fdfdfd;
 }
 
 [data-theme="dark"] .footer-section ul li a:hover {
-  color: #ffffff; /* lighter hover color */
+  color: #fdfdfd;
 }
 
 [data-theme="dark"] .footer-social a {
-  color: #ffffff;
+  color: #fdfdfd;
 }
 
 [data-theme="dark"] .footer-social a:hover {
-  color: #ffffff;
+  color: #fdfdfd;
 }
 
 [data-theme="dark"] .footer-bottom {
   background-color: #121212;
-  color: #ffffff;
+  color: #fdfdfd;
 }
 
 [data-theme="dark"] .scroll-to-top {
@@ -222,4 +218,3 @@
 [data-theme="dark"] .scroll-to-top:hover {
   background-color: #42a5f5;
 }
-

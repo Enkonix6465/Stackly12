@@ -1,26 +1,17 @@
 :root {
-  --bg-color: white;
-  --text-color: black;
-  --dropdown-bg: #f0f0f0;
-  --hover-bg: #ddd;
-  --header-border: #ccc;
-}
-:root {
-  --bg-color: white;
-  --text-color: black;
+  --bg-color: #ffffff;       /* Pure white */
+  --text-color: #000000;     /* Pure black */
+  --dropdown-bg: #f2f2f2;    /* Unified light gray */
+  --hover-bg: #d9d9d9;       /* Unified hover gray */
+  --header-border: #bfbfbf;  /* Unified border gray */
 }
 
 [data-theme="dark"] {
-  --bg-color: #1a1a1a;
-  --text-color: #f0f0f0;
-}
-
-[data-theme="dark"] {
-  --bg-color: #1a1a1a;
-  --text-color: #f0f0f0;
-  --dropdown-bg: #333;
-  --hover-bg: #444;
-  --header-border: #444;
+  --bg-color: #1a1a1a;       /* Dark gray, consistent */
+  --text-color: #f2f2f2;     /* Light gray for readability */
+  --dropdown-bg: #2a2a2a;    /* Unified dropdown dark gray */
+  --hover-bg: #3a3a3a;       /* Unified hover dark gray */
+  --header-border: #444444;  /* Consistent border */
 }
 
 /* Header layout */
@@ -103,7 +94,7 @@
 
 .dropdown a:hover {
   background-color: var(--hover-bg);
-  color: black;
+  color: #000000;
 }
 
 /* Right section */
@@ -129,8 +120,8 @@
 }
 
 .avatarCircle {
-  background-color:darkblue;
-  color: white;
+  background-color: darkblue;
+  color: #ffffff;
   width: 40px;
   height: 40px;
   font-weight: bold;

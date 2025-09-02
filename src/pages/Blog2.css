@@ -1,6 +1,6 @@
 /* Root Colors (you can place this in index.css or global styles) */
 :root {
-  --background-color: #ffffff;
+  --background-color: #fdfdfd;
   --text-color: #000000;
   --accent-color: #007bff;
   --card-bg: #f5f7fa;
@@ -8,7 +8,7 @@
 
 html[data-theme='dark'] {
   --background-color: #121212;
-  --text-color: #ffffff;
+  --text-color: #fdfdfd;
   --accent-color: #1e90ff;
   --card-bg: #1f1f1f;
 }
@@ -101,22 +101,22 @@ html[data-theme='dark'] {
 
 
 /* Dark Theme Overrides */
+body.dark-theme .cloud-native-section {
+  background-color: #121212;
+}
+
+body.dark-theme .cloud-native-card {
+  background-color: #1f1f1f;
+  color: #fdfdfd;
+  box-shadow: 0 6px 24px rgba(255, 255, 255, 0.1);
+}
+
 body.dark-theme .cloud-native-point:hover {
-  background-color: rgba(30, 144, 255, 0.16); /* lighter accent in dark */
+  background-color: rgba(30, 144, 255, 0.16);
   transform: scale(1.02);
 }
 
 body.dark-theme .cloud-native-link:hover {
   color: #66b2ff;
   text-decoration: underline;
-}
-
-body.dark-theme .cloud-native-card {
-  background-color: #1f1f1f;
-  color: #fff;
-  box-shadow: 0 6px 24px rgba(255, 255, 255, 0.1);
-}
-
-body.dark-theme .cloud-native-section {
-  background-color: #121212;
 }

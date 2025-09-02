@@ -105,7 +105,7 @@ const Footer = () => {
         <div className="footer-section">
           <h4>{t("quickLinks")}</h4>
           <ul>
-            <li><Link to="/">{t("home")}</Link></li>
+            <li><Link to="/home">{t("home")}</Link></li>
             <li><Link to="/about">{t("about")}</Link></li>
             <li><Link to="/services">{t("servicesPage")}</Link></li>
             <li><Link to="/blog">{t("blog")}</Link></li>
