@@ -555,6 +555,10 @@ h2,
 .cloud-container {
   max-width: 1200px;
   margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
 }
 
 #cloud-services h1 {

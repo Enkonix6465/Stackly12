@@ -687,12 +687,20 @@
   font-size: 2.5em;
   color: #2c3e50;
   margin-bottom: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+[data-theme="dark"] .section-title {
+  color: #bbdefb;
 }
 
 .section-subtitle {
   font-size: 1.1em;
   color: #7f8c8d;
   margin-bottom: 50px;
+}
+[data-theme="dark"] .section-subtitle {
+  color: #90a4ae;
 }
 
 /* Grid for 3 Cards */
@@ -711,10 +719,18 @@
   padding: 40px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+[data-theme="dark"] .testimonial-card {
+  background-color: #1e1e1e;
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.05);
+  color: #ccc;
+}
 
 .testimonial-card:hover {
   transform: translateY(-10px);
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+[data-theme="dark"] .testimonial-card:hover {
+  box-shadow: 0 8px 30px rgba(255, 255, 255, 0.1);
 }
 
 .testimonial-card blockquote {
@@ -751,6 +767,24 @@
   border-radius: 50%;
   margin-right: 15px;
   flex-shrink: 0;
+}
+
+.client-details h4 {
+  font-size: 1.2em;
+  margin: 0;
+  color: #2c3e50;
+}
+[data-theme="dark"] .client-details h4 {
+  color: #bbdefb;
+}
+
+.client-details p {
+  font-size: 0.9em;
+  color: #7f8c8d;
+  margin: 0;
+}
+[data-theme="dark"] .client-details p {
+  color: #90a4ae;
 }
 
 .client-details h4 {
@@ -900,12 +934,18 @@
   text-align: justify;
   color: #222;
 }
+[data-theme="dark"] .cta-title {
+  color: #bbdefb;
+}
 
 .cta-text {
   font-size: 1rem;
   color: #555;
   margin-bottom: 25px;
   line-height: 1.6;
+}
+[data-theme="dark"] .cta-text {
+  color: #90a4ae;
 }
 
 .cta-btn {
@@ -918,48 +958,27 @@
   cursor: pointer;
   transition: background 0.3s ease;
 }
-
-.cta-btn:hover {
-  background: #ffffff;
-  color: #0056ff;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .cta-container {
-    flex-direction: column;
-    text-align: center;
-  }
-}
-/* Dark Theme Overrides */
-[data-theme="dark"] .contact-cta {
-  background: #121212;
-}
-
-[data-theme="dark"] .cta-container {
-  /* Optional: keep layout same, no color needed */
-}
-
-[data-theme="dark"] .cta-image img {
-  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
-}
-
-[data-theme="dark"] .cta-title {
-  color: #bbdefb;
-}
-
-[data-theme="dark"] .cta-text {
-  color: #90a4ae;
-}
-
 [data-theme="dark"] .cta-btn {
   background: #0056ff;
   color: #fff;
 }
 
+.cta-btn:hover {
+  background: #ffffff;
+  color: #0056ff;
+}
 [data-theme="dark"] .cta-btn:hover {
   background: #ffffff;
   color: #0056ff;
+}
+
+[data-theme="dark"] .contact-cta {
+  background: #121212;
+  color: #eee;
+}
+
+[data-theme="dark"] .cta-image img {
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
 }
 
 

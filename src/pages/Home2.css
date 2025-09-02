@@ -1100,6 +1100,28 @@ mission-section {
     text-align: center;
   }
 }
+[data-theme="dark"] .contact-cta {
+  background: #121212;
+  color: #eee;
+}
+
+[data-theme="dark"] .cta-title {
+  color: #bbdefb;
+}
+
+[data-theme="dark"] .cta-text {
+  color: #90a4ae;
+}
+
+[data-theme="dark"] .cta-btn {
+  background: #0056ff;
+  color: #fff;
+}
+
+[data-theme="dark"] .cta-btn:hover {
+  background: #fff;
+  color: #0056ff;
+}
 
 
 

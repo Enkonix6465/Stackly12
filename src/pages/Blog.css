@@ -246,9 +246,11 @@
 
 .section-title {
   text-align: center;
-  font-size: 2.2rem;
-  color: #0b1f3a;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #1a2e4a;
   margin-bottom: 3rem;
+  letter-spacing: 0.05em;
 }
 
 .feature-row {
@@ -464,6 +466,10 @@ html, body {
   letter-spacing: 0.05em;
 }
 
+[data-theme="dark"] .section-title {
+  color: #fdfdfd;
+}
+
 .leadership-list {
   display: flex;
   flex-direction: column;
@@ -484,13 +490,22 @@ html, body {
   box-shadow: 0 8px 20px rgba(0,0,0,0.1);
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  max-width: 100%; /* Prevent overflow */
+  max-width: 100%;
   box-sizing: border-box;
+}
+
+[data-theme="dark"] .leadership-item {
+  background: #1e1e1e;
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.05);
 }
 
 .leadership-item:hover {
   transform: translateX(10px);
   box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+}
+
+[data-theme="dark"] .leadership-item:hover {
+  box-shadow: 0 12px 28px rgba(255, 255, 255, 0.08);
 }
 
 .leadership-text {
@@ -503,49 +518,29 @@ html, body {
   color: #003366;
 }
 
+[data-theme="dark"] .leadership-text h3 {
+  color: #4dabf7;
+}
+
 .leadership-text p {
   font-size: 1rem;
   color: #444;
   line-height: 1.5;
 }
 
+[data-theme="dark"] .leadership-text p {
+  color: #cccccc;
+}
+
 .leadership-item img {
-  max-width: 150px; /* max width */
-  width: 100%; /* responsive width */
-  height: auto; /* keep aspect ratio */
+  max-width: 150px;
+  width: 100%;
+  height: auto;
   object-fit: cover;
   border-radius: 10px;
   box-shadow: 0 6px 14px rgba(0,0,0,0.1);
   flex-shrink: 0;
   transition: transform 0.3s ease;
-}
-
-.leadership-item:hover img {
-  transform: scale(1.05);
-}
-[data-theme="dark"] .leadership-section {
-  background-color: #121212;
-}
-
-[data-theme="dark"] .section-title {
-  color: #fdfdfd;
-}
-
-[data-theme="dark"] .leadership-item {
-  background: #1e1e1e;
-  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.05);
-}
-
-[data-theme="dark"] .leadership-item:hover {
-  box-shadow: 0 12px 28px rgba(255, 255, 255, 0.08);
-}
-
-[data-theme="dark"] .leadership-text h3 {
-  color: #4dabf7; /* Light blue heading */
-}
-
-[data-theme="dark"] .leadership-text p {
-  color: #cccccc;
 }
 
 [data-theme="dark"] .leadership-item img {
