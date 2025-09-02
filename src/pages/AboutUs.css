@@ -499,9 +499,7 @@
   color: #e0e0e0;
 }
 
-[data-theme="dark"] .expert-testimonials {
-  /* layout stays same */
-}
+
 
 [data-theme="dark"] .expert-card {
   background: #2a2a2a;
@@ -671,18 +669,12 @@
   color: #e0e0e0;
 }
 
-[data-theme="dark"] .testimonial-box-container {
-  /* no bg, but layout stays same */
-}
 
 [data-theme="dark"] .testimonial-wrapper {
   background-color: #2a2a2a;
   box-shadow: 0 6px 12px rgba(255, 255, 255, 0.05);
 }
 
-[data-theme="dark"] .testimonial {
-  /* no change */
-}
 
 [data-theme="dark"] .testimonial-card {
   background: #3a3a3a;

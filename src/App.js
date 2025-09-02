@@ -16,7 +16,7 @@ import { DarkModeProvider, useDarkMode } from "./context/Darkmodecontext";
 import Welcome from "./pages/Welcome";
 import Home from "./pages/Home";
 import Home2 from "./pages/Home2";
-import AboutUs from "./pages/AboutUS";
+import AboutUs from "./pages/AboutUs";
 import Services from "./pages/Services";
 import ContactUs from "./pages/ContactUs";
 import Blog from "./pages/Blog";
@@ -29,7 +29,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 // ✅ Capitalized default imports from pages
 import Cloud from "./pages/Cloud";
 import CustomerFirst from "./pages/CustomerFirst";
-import Cybersecurity from "./pages/Cybersecurity";
+import Cybersecurity from "./pages/CyberSecurity";
 import DataAI from "./pages/DataAI";
 import IntelligentIndustry from "./pages/IntelligentIndustry";
 import EnterpriseManagement from "./pages/EnterpriseManagement";
