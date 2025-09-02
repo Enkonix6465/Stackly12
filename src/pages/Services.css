@@ -230,6 +230,32 @@
     padding: 0.75rem 1rem;
   }
 }
+[data-theme="dark"] .explore-services-section {
+  background-color: #121212;
+}
+
+[data-theme="dark"] .explore-services-title {
+  color: #ffffff;
+}
+
+[data-theme="dark"] .explore-service-card {
+  background-color: #1e1e1e;
+  box-shadow: 0 2px 12px rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .explore-service-card:hover {
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .explore-service-label {
+  background-color: #1a1a1a;
+  color: #cccccc;
+  border-top: 1px solid #333;
+}
+
+[data-theme="dark"] .explore-service-label:hover {
+  color: #4dabf7; /* Light blue highlight on hover */
+}
 
 
 
@@ -430,6 +456,27 @@
 }
 
 }
+[data-theme="dark"] .process-section {
+  background-color: #121212;
+}
+
+[data-theme="dark"] .rotating-circle {
+  border: 2px dashed #444; /* darker border */
+}
+
+[data-theme="dark"] .center-text {
+  color: #e0e0e0; /* light text */
+}
+
+[data-theme="dark"] .step {
+  background-color: #1e1e1e;
+  color: #ccc;
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .process-image img {
+  border: 1px solid #333; /* optional subtle border for image contrast */
+}
 
 
 
@@ -516,6 +563,30 @@
     font-size: 1.8rem;
     margin-bottom: 25px;
   }
+}
+[data-theme="dark"] .offerings-section {
+  background: #121212;
+}
+
+[data-theme="dark"] .offerings-section h2 {
+  color: #ffffff;
+}
+
+[data-theme="dark"] .offering-item {
+  background: #1e1e1e;
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .offering-item:hover {
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .offering-title {
+  color: #4dabf7; /* lighter blue for dark theme */
+}
+
+[data-theme="dark"] .offering-desc {
+  color: #cccccc;
 }
 
 
@@ -639,6 +710,27 @@
     margin-bottom: 25px;
     text-align: center;
   }
+}
+[data-theme="dark"] .timeline-section {
+  background: #121212;
+}
+
+[data-theme="dark"] .timeline-title {
+  color: #ffffff;
+}
+
+[data-theme="dark"] .timeline-step .icon {
+  background: #1e1e1e;
+  color: #4dabf7;
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .timeline-step h3 {
+  color: #4dabf7;
+}
+
+[data-theme="dark"] .timeline-step p {
+  color: #cccccc;
 }
 
 

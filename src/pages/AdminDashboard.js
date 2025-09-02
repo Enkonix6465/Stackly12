@@ -1,233 +1,236 @@
-import React, { useEffect, useState } from "react";
-import { Bar, Line } from "react-chartjs-2";
+import React, { useEffect, useState, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  LineElement,
-  PointElement,
-  Title,
+  ArcElement,
   Tooltip,
   Legend,
-} from "chart.js";
-
-ChartJS.register(
   CategoryScale,
   LinearScale,
   BarElement,
-  LineElement,
-  PointElement,
-  Title,
+} from "chart.js";
+import { Pie, Bar } from "react-chartjs-2";
+import "./AdminDashboard.css";
+
+ChartJS.register(
+  ArcElement,
   Tooltip,
-  Legend
+  Legend,
+  CategoryScale,
+  LinearScale,
+  BarElement
 );
 
-// Fade-in & slide-up animation style
-const fadeInUp = {
-  animation: "fadeInUp 0.8s ease forwards",
-  opacity: 0,
-  transform: "translateY(20px)",
-};
-
-const styles = {
-  keyframes: `
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    tr:hover {
-      background-color: #001f4d !important;
-      color: white !important;
-      transition: background-color 0.3s, color 0.3s;
-      cursor: pointer;
-    }
-    .card-hover:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 8px 20px rgba(0,31,77,0.6);
-      transition: transform 0.3s, box-shadow 0.3s;
-      cursor: pointer;
-    }
-    .activity-item:hover {
-      background-color: #e6f0ff;
-      transition: background-color 0.3s;
-      cursor: default;
-    }
-  `,
-};
-
 const AdminDashboard = () => {
-  const [allUserData, setAllUserData] = useState([]);
-  const [loginStats, setLoginStats] = useState({ labels: [], data: [] });
-  const [signupStats, setSignupStats] = useState({ labels: [], data: [] });
-  const [userStatus, setUserStatus] = useState({ activeUsers: 0, inactiveUsers: 0 });
-  const [recentLogins, setRecentLogins] = useState([]);
-  const [signupGrowth, setSignupGrowth] = useState({ percent: 0, isGrowth: true });
+  const navigate = useNavigate();
+  const [theme, setTheme] = useState("light");
+  const [loginData, setLoginData] = useState({});
+  const [users, setUsers] = useState([]);
+  const [language, setLanguage] = useState(localStorage.getItem("app_language") || "en");
+
+  const isDark = theme === "dark";
+  const isRTL = language === "he" || language === "ar";
+
+  const translations = useMemo(() => ({
+    en: {
+      title: "Admin Dashboard",
+      logout: "Logout",
+      totalUsers: "Total Users",
+      totalLogins: "Total Logins",
+      recentLogins: "Recent Logins",
+      email: "Email",
+      lastLogin: "Last Login",
+      noLogins: "No login data.",
+      signupTypes: "Signup Types",
+      monthlyLogins: "Monthly Logins",
+      corporate: "Corporate",
+      other: "Other",
+      unknown: "Unknown",
+    },
+    he: {
+      title: "לוח ניהול",
+      logout: "התנתק",
+      totalUsers: "סה״כ משתמשים",
+      totalLogins: "סה״כ התחברויות",
+      recentLogins: "התחברויות אחרונות",
+      email: "אימייל",
+      lastLogin: "כניסה אחרונה",
+      noLogins: "אין נתוני התחברות.",
+      signupTypes: "סוגי הרשמה",
+      monthlyLogins: "התחברויות חודשיות",
+      corporate: "ארגוני",
+      other: "אחר",
+      unknown: "לא ידוע",
+    },
+    ar: {
+      title: "لوحة تحكم المشرف",
+      logout: "تسجيل الخروج",
+      totalUsers: "إجمالي المستخدمين",
+      totalLogins: "إجمالي تسجيلات الدخول",
+      recentLogins: "تسجيلات الدخول الأخيرة",
+      email: "البريد الإلكتروني",
+      lastLogin: "آخر تسجيل دخول",
+      noLogins: "لا توجد بيانات تسجيل دخول.",
+      signupTypes: "أنواع التسجيل",
+      monthlyLogins: "تسجيلات الدخول الشهرية",
+      corporate: "الشركات",
+      other: "أخرى",
+      unknown: "غير معروف",
+    },
+  }), []);
+
+  const t = (key) => translations[language]?.[key] || key;
 
   useEffect(() => {
-    const users = JSON.parse(localStorage.getItem("users")) || [];
-    const logins = JSON.parse(localStorage.getItem("userLogins")) || {};
+    setLoginData(JSON.parse(localStorage.getItem("userLogins")) || {});
+    setUsers(JSON.parse(localStorage.getItem("users")) || {});
 
-    const usersWithLogin = users.map((u) => ({
-      name: `${u.firstName} ${u.lastName}`,
-      email: u.email,
-      loginTime: logins[u.email] || "N/A",
-      signupDate: u.signupDate || "N/A",
-    }));
-    setAllUserData(usersWithLogin);
+    const handler = (e) => {
+      const newLang = e?.detail?.language || localStorage.getItem("app_language") || "en";
+      setLanguage(newLang);
+    };
 
-    // Login stats + recent logins
-    const counts = {};
-    const timestamps = [];
-    Object.entries(logins).forEach(([email, ts]) => {
-      if (ts && ts !== "N/A") {
-        const dt = new Date(ts).toLocaleDateString();
-        counts[dt] = (counts[dt] || 0) + 1;
-        timestamps.push({ email, dateTime: ts });
-      }
-    });
-    const sortedDates = Object.keys(counts).sort((a, b) => new Date(a) - new Date(b));
-    setLoginStats({ labels: sortedDates, data: sortedDates.map((d) => counts[d]) });
-
-    const latest = timestamps.sort((a, b) => new Date(b.dateTime) - new Date(a.dateTime)).slice(0, 5);
-    setRecentLogins(latest);
-
-    // Signup stats
-    const sCounts = {};
-    users.forEach((u) => {
-      if (u.signupDate) {
-        const ds = new Date(u.signupDate).toLocaleDateString();
-        sCounts[ds] = (sCounts[ds] || 0) + 1;
-      }
-    });
-    const sDates = Object.keys(sCounts).sort((a, b) => new Date(a) - new Date(b));
-    const sData = sDates.map((d) => sCounts[d]);
-    setSignupStats({ labels: sDates, data: sData });
-
-    // Signup growth calc
-    const totalRecentWeek = sData.slice(-7).reduce((a, b) => a + b, 0);
-    const totalPrevWeek = sData.slice(-14, -7).reduce((a, b) => a + b, 0);
-    const growth = totalPrevWeek ? ((totalRecentWeek - totalPrevWeek) / totalPrevWeek) * 100 : totalRecentWeek > 0 ? 100 : 0;
-    setSignupGrowth({ percent: Math.abs(growth.toFixed(1)), isGrowth: growth >= 0 });
-
-    // Active / inactive
-    const now = Date.now();
-    const activeTh = 30 * 24 * 60 * 60 * 1000;
-    let act = 0, inact = 0;
-    usersWithLogin.forEach((u) => {
-      if (u.loginTime !== "N/A") {
-        const diff = now - new Date(u.loginTime).getTime();
-        diff <= activeTh ? act++ : inact++;
-      } else inact++;
-    });
-    setUserStatus({ activeUsers: act, inactiveUsers: inact });
+    window.addEventListener("languageChanged", handler);
+    return () => window.removeEventListener("languageChanged", handler);
   }, []);
 
-  if (!allUserData.length) {
-    return <p style={{ color: "#001f4d", fontSize: 18, textAlign: "center", marginTop: 40 }}>No users found.</p>;
-  }
+  const totalUsers = users.length;
+  const totalLogins = Object.keys(loginData).length;
 
-  const loginData = {
-    labels: loginStats.labels,
-    datasets: [{ label: "Logins", data: loginStats.data, backgroundColor: "rgba(0,31,77,0.8)", borderRadius: 4 }],
+  const corpCount = users.filter((u) => u.email?.endsWith("@enkonix.in")).length;
+  const otherCount = totalUsers - corpCount;
+
+  const pieData = {
+    labels: [t("corporate"), t("other"), t("unknown")],
+    datasets: [
+      {
+        data: [corpCount, otherCount, 0],
+        backgroundColor: ["white", "black", "blue"],
+        hoverOffset: 15,
+        hoverBorderColor: "blue",
+        hoverBorderWidth: 4,
+      },
+    ],
   };
+
+  const loginEntries = Object.entries(loginData).map(([email, time]) => ({
+    email,
+    time: new Date(time).toLocaleString(),
+  }));
+
+  const counts = {};
+  Object.values(loginData).forEach((ts) => {
+    const d = new Date(ts);
+    const label = `${d.toLocaleString("default", { month: "short" })} ${d.getFullYear()}`;
+    counts[label] = (counts[label] || 0) + 1;
+  });
+
+  const barData = {
+    labels: Object.keys(counts),
+    datasets: [
+      {
+        label: t("monthlyLogins"),
+        data: Object.values(counts),
+        backgroundColor: "blue",
+        borderRadius: 6,
+        maxBarThickness: 40,
+      },
+    ],
+  };
+
   const chartOptions = {
-    responsive: true,
+    maintainAspectRatio: false,
+    animation: { duration: 800, easing: "easeOutQuart" },
     plugins: {
-      legend: { labels: { color: "#000" }, position: "top" },
-      title: { display: true, font: { size: 22, weight: "bold" }, color: "#000" },
-      tooltip: { mode: "index", intersect: false },
+      legend: { labels: { color: isDark ? "#e0e0e0" : "#111" } },
+      tooltip: {
+        backgroundColor: isDark ? "#e0e0e0" : "#111",
+        titleColor: isDark ? "#121212" : "#f9f9f9",
+        bodyColor: isDark ? "#121212" : "#f9f9f9",
+      },
     },
     scales: {
-      x: { ticks: { color: "#001f4d", maxRotation: 90, minRotation: 45 }, grid: { color: "#e0e0e0" } },
-      y: { ticks: { color: "#001f4d" }, grid: { color: "#e0e0e0" }, beginAtZero: true },
+      y: {
+        beginAtZero: true,
+        ticks: { color: isDark ? "#e0e0e0" : "#111" },
+        grid: { color: isDark ? "#333" : "#eee" },
+      },
+      x: {
+        ticks: { color: isDark ? "#e0e0e0" : "#111" },
+        grid: { color: isDark ? "#333" : "#eee" },
+      },
     },
-  };
-  const signupData = {
-    labels: signupStats.labels,
-    datasets: [{ label: "Signups", data: signupStats.data, fill: false, borderColor: "rgba(0,31,77,0.9)", backgroundColor: "rgba(0,31,77,0.5)", tension: 0.3, pointRadius: 6 }],
   };
 
   return (
-    <>
-      <style>{styles.keyframes}</style>
-      <div style={{ maxWidth: 1000, margin: "40px auto", padding: "20px", fontFamily: "'Segoe UI', sans-serif", backgroundColor: "#f5f8fc", color: "#001f4d", borderRadius: 10, boxShadow: "0 6px 20px rgba(0,31,77,0.15)" }}>
-        
-        {/* User Data Table */}
-        <section style={{ ...fadeInUp, marginBottom: 60, padding: 20, backgroundColor: "#fff", borderRadius: 12, boxShadow: "0 4px 15px rgba(0,31,77,0.1)" }}>
-          <h2 style={{ marginBottom: 20, color: "#001f4d", fontWeight: 700 }}>User Data Table</h2>
-          <div style={{ overflowX: "auto" }}>
-            <table style={{ width: "100%", borderCollapse: "collapse", minWidth: 600, fontSize: 16, color: "#001f4d" }}>
-              <thead>
-                <tr style={{ backgroundColor: "#001f4d", color: "#fff", userSelect: "none" }}>
-                  <th style={{ padding: "14px", borderBottom: "3px solid #004080", textAlign: "left" }}>Name</th>
-                  <th style={{ padding: "14px", borderBottom: "3px solid #004080", textAlign: "left" }}>Email</th>
-                  <th style={{ padding: "14px", borderBottom: "3px solid #004080", textAlign: "left" }}>Login Date/Time</th>
+    <div data-theme={theme} className={`dashboard-root ${theme}`} dir={isRTL ? "rtl" : "ltr"}>
+      <header
+        className="dashboard-header"
+        onClick={() => setTheme(isDark ? "light" : "dark")}
+        title="Click to toggle theme"
+      >
+        <h2>{t("title")}</h2>
+        <button
+          className="logout-btn"
+          onClick={(e) => {
+            e.stopPropagation();
+            navigate("/welcome");
+          }}
+          aria-label={t("logout")}
+        >
+          {t("logout")}
+        </button>
+      </header>
+
+      <section className="dashboard-stats">
+        {[{ label: t("totalUsers"), value: totalUsers }, { label: t("totalLogins"), value: totalLogins }].map(
+          ({ label, value }) => (
+            <div key={label} className="stat-card">
+              <h3>{label}</h3>
+              <p>{value}</p>
+            </div>
+          )
+        )}
+      </section>
+
+      <section className="recent-logins">
+        <h4>{t("recentLogins")}</h4>
+        <table>
+          <thead>
+            <tr>
+              <th>{t("email")}</th>
+              <th>{t("lastLogin")}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {loginEntries.length > 0 ? (
+              loginEntries.map(({ email, time }) => (
+                <tr key={email}>
+                  <td>{email}</td>
+                  <td>{time}</td>
                 </tr>
-              </thead>
-              <tbody>
-                {allUserData.map((u, idx) => (
-                  <tr key={idx} className="table-row-hover" style={{ borderBottom: "1px solid #cbd5e1", backgroundColor: idx % 2 === 0 ? "#fff" : "#e6f0ff", transition: "background-color 0.3s, color 0.3s" }}>
-                    <td style={{ padding: "12px" }}>{u.name}</td>
-                    <td style={{ padding: "12px" }}>{u.email}</td>
-                    <td style={{ padding: "12px" }}>{u.loginTime !== "N/A" ? new Date(u.loginTime).toLocaleString() : "—"}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
+              ))
+            ) : (
+              <tr>
+                <td colSpan={2}>{t("noLogins")}</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </section>
 
-        {/* Login Chart */}
-        <section style={{ ...fadeInUp, marginBottom: 60, padding: 20, backgroundColor: "#fff", borderRadius: 12, boxShadow: "0 4px 15px rgba(0,31,77,0.1)" }}>
-          <h2 style={{ marginBottom: 20, color: "#001f4d", fontWeight: 700 }}>Login Activity Graph</h2>
-          <Bar data={loginData} options={{ ...chartOptions, plugins: { ...chartOptions.plugins, title: { ...chartOptions.plugins.title, text: "User Logins Per Day" } } }} />
-        </section>
+      <section className="dashboard-charts">
+        <div className="chart-container pie-container">
+          <h4>{t("signupTypes")}</h4>
+          <Pie data={pieData} options={chartOptions} />
+        </div>
 
-        {/* Signup Chart */}
-        <section style={{ ...fadeInUp, marginBottom: 60, padding: 20, backgroundColor: "#e6f0ff", borderRadius: 12, boxShadow: "0 4px 15px rgba(0,31,77,0.1)" }}>
-          <h2 style={{ marginBottom: 20, color: "#001f4d", fontWeight: 700 }}>User Signup Trends</h2>
-          <Line data={signupData} options={{ ...chartOptions, plugins: { ...chartOptions.plugins, title: { ...chartOptions.plugins.title, text: "User Signup Trends" } } }} />
-        </section>
-
-        {/* Active / Inactive Users */}
-        <section style={{ ...fadeInUp,marginBottom:40, display: "flex", justifyContent: "space-around", padding: 20, backgroundColor: "#fff", borderRadius: 12, boxShadow: "0 4px 20px rgba(0,31,77,0.12)", gap: 20 }}>
-          <div className="card-hover" style={{ flex: 1, padding: 24, backgroundColor: "#001f4d", color: "#fff", borderRadius: 12, textAlign: "center", boxShadow: "0 6px 18px rgba(0,31,77,0.4)" }}>
-            <h3 style={{ marginBottom: 12, fontWeight: 700 }}>Active Users</h3>
-            <p style={{ margin: 0, fontSize: 36 }}>{userStatus.activeUsers}</p>
-            <small style={{ fontWeight: 500 }}>Logged in last 30 days</small>
-          </div>
-          <div className="card-hover" style={{ flex: 1, padding: 24, backgroundColor: "#000", color: "#00aaff", borderRadius: 12, textAlign: "center", boxShadow: "0 6px 18px rgba(0,170,255,0.5)" }}>
-            <h3 style={{ marginBottom: 12, fontWeight: 700 }}>Inactive Users</h3>
-            <p style={{ margin: 0, fontSize: 36 }}>{userStatus.inactiveUsers}</p>
-            <small style={{ fontWeight: 500 }}>Not logged in in 30 days</small>
-          </div>
-        </section>
-
-        {/* New Section – Recent Login Activity */}
-        <section style={{ ...fadeInUp, marginBottom: 60, padding: 40, backgroundColor: "#fff", borderRadius: 12, boxShadow: "0 4px 15px rgba(0,31,77,0.1)" }}>
-          <h2 style={{  marginBottom: 12, fontWeight: 700, color: "#001f4d", fontWeight: 700 }}>Recent Login Activity</h2>
-          <div style={{ maxHeight: 200, overflowY: "auto" }}>
-            {recentLogins.map((entry, idx) => (
-              <div key={idx} className="activity-item" style={{ padding: 12, borderBottom: "1px solid #e0e0e0", display: "flex", justifyContent: "space-between" }}>
-                <span>{entry.email}</span>
-                <span>{new Date(entry.dateTime).toLocaleString()}</span>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* New Section – Signup Growth Comparison */}
-        <section className="card-hover" style={{ ...fadeInUp, padding: 24, borderRadius: 12, backgroundColor: signupGrowth.isGrowth ? "#fafafaff" : "#fff5f5", color: signupGrowth.isGrowth ? "#001f4d" : "#001f4d", textAlign: "center", marginBottom: 60, boxShadow: `0 4px 12px rgba(${signupGrowth.isGrowth ? "0,102,68" : "153,0,0"}, 0.4)` }}>
-          <h3 style={{ marginBottom: 12, fontWeight: 700 }}>Signup Growth This Week</h3>
-          <p style={{ margin: 0, fontSize: 36 }}>{signupGrowth.isGrowth ? "▲" : "▼"} {signupGrowth.percent}%</p>
-          <small style={{ fontWeight: 500 }}>compared to previous week</small>
-        </section>
-
-      </div>
-    </>
+        <div className="chart-container bar-container">
+          <h4>{t("monthlyLogins")}</h4>
+          <Bar data={barData} options={chartOptions} />
+        </div>
+      </section>
+    </div>
   );
 };
 

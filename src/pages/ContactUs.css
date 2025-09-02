@@ -1,12 +1,19 @@
 .contact-section {
-  padding: 100px 10%;
+  padding: 20px; /* equal padding on all sides */
   height: fit-content;
-  background: #cddbe6; /* light green like your image */
+  padding-top: 15px;
+  background: #cddbe6;
+  margin: 0 !important;
+  width: 100% !important;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
+
 .contact-container {
+  padding: 15px 15px 0px 15px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 2fr);
   gap: 25px;
 }
 
@@ -47,7 +54,6 @@
 .contact-card p {
   font-size: 0.95rem;
   color: #000000;
-  margin: 5px 0;
 }
 @media (max-width: 768px) {
   .contact-section {
@@ -85,6 +91,67 @@
     font-size: 0.9rem;
   }
 }
+[data-theme="dark"] .contact-section {
+  background: #1a1a1a; /* dark background */
+  color: #ddd;
+}
+
+[data-theme="dark"] .contact-container {
+  /* No change needed here, grid stays the same */
+}
+
+[data-theme="dark"] .contact-card {
+  background: #222; /* dark card background */
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.05);
+  color: #ccc;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+[data-theme="dark"] .contact-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.12);
+}
+
+[data-theme="dark"] .icon-circle {
+  background: #444; /* lighter dark circle */
+  color: #90caf9;  /* subtle blue tint for icons */
+}
+
+[data-theme="dark"] .contact-card h3 {
+  color: #90caf9; /* blue for headings */
+}
+
+[data-theme="dark"] .contact-card p {
+  color: #bbb; /* lighter text */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  [data-theme="dark"] .contact-section {
+    padding: 50px 5%;
+  }
+}
+
+@media (max-width: 480px) {
+  [data-theme="dark"] .contact-card {
+    padding: 0px;
+  }
+
+  [data-theme="dark"] .icon-circle {
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    margin-bottom: 12px;
+  }
+
+  [data-theme="dark"] .contact-card h3 {
+    font-size: 1rem;
+  }
+
+  [data-theme="dark"] .contact-card p {
+    font-size: 0.9rem;
+  }
+}
 
 
 
@@ -101,6 +168,7 @@
 .contact-full {
   display: flex;
   width: 100%;
+  padding:0px;
   height: 100vh; /* full screen height */
 }
 
@@ -227,6 +295,70 @@
     padding: 12px 0;
   }
 }
+[data-theme="dark"] .contact-full {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+[data-theme="dark"] .contact-left img {
+  filter: brightness(0.85);
+}
+
+[data-theme="dark"] .contact-right {
+  background: #1e1e1e;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+}
+
+[data-theme="dark"] .contact-right h2 {
+  color: #90caf9;
+}
+
+[data-theme="dark"] .contact-right input,
+[data-theme="dark"] .contact-right textarea {
+  background-color: #2c2c2c;
+  color: #e0e0e0;
+  border: 1px solid #555;
+}
+
+[data-theme="dark"] .contact-right input::placeholder,
+[data-theme="dark"] .contact-right textarea::placeholder {
+  color: #999;
+}
+
+[data-theme="dark"] .contact-right input:focus,
+[data-theme="dark"] .contact-right textarea:focus {
+  border-color: #64b5f6;
+  background-color: #333;
+  outline: none;
+}
+
+[data-theme="dark"] .contact-right button {
+  background: #64b5f6;
+  color: #121212;
+}
+
+[data-theme="dark"] .contact-right button:hover {
+  background: #90caf9;
+  color: #121212;
+}
+
+[data-theme="dark"] .success-box {
+  background: #1e1e1e;
+  color: #a5d6a7;
+}
+
+[data-theme="dark"] .success-box h2 {
+  color: #a5d6a7;
+}
+
+/* Responsive overrides */
+@media (max-width: 768px) {
+  [data-theme="dark"] .contact-right {
+    box-shadow: none;
+    border-radius: 0;
+  }
+}
 
 
 
@@ -260,7 +392,7 @@
   width: 100%;
   height: 70vh; /* Adjust height */
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-              url("https://i.pinimg.com/1200x/73/31/76/7331766da00be72c7d80a04517193df6.jpg") center/cover no-repeat;
+              url("https://i.pinimg.com/1200x/f6/61/1d/f6611d7a8cdc5d8ee808dfc24beed876.jpg") center/cover no-repeat;
   color: #fff;
   display: flex;
   align-items: center;
@@ -324,103 +456,20 @@
   }
 }
 
-
-
-/* ========== DARK THEME FOR CONTACT SECTION ========== */
-body.dark-theme .contact-section {
-  background: #1a1a1a;
+/* Remove horizontal scrollbar in last section */
+body, html {
+  overflow-x: hidden !important;
+  margin: 0;
+  padding: 0;
 }
 
-body.dark-theme .contact-card {
-  background: #2a2a2a;
-  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.05);
+.contact-section,
+.contact-full,
+.map-section {
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 100% !important;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
-body.dark-theme .contact-card h3 {
-  color: #64b5f6;
-}
-
-body.dark-theme .contact-card p {
-  color: #dddddd;
-}
-
-body.dark-theme .icon-circle {
-  background: #333;
-  color: #64b5f6;
-}
-
-/* Contact Form Section */
-body.dark-theme .contact-right {
-  background: #1e1e1e;
-}
-
-body.dark-theme .contact-right h2 {
-  color: #ffffff;
-}
-
-body.dark-theme .contact-right input,
-body.dark-theme .contact-right textarea {
-  background: #2e2e2e;
-  color: #ffffff;
-  border: 1px solid #555;
-}
-
-body.dark-theme .contact-right input::placeholder,
-body.dark-theme .contact-right textarea::placeholder {
-  color: #aaaaaa;
-}
-
-body.dark-theme .contact-right input:focus,
-body.dark-theme .contact-right textarea:focus {
-  border-color: #64b5f6;
-}
-
-body.dark-theme .contact-right button {
-  background: #64b5f6;
-  color: #fff;
-}
-
-body.dark-theme .contact-right button:hover {
-  background: #ffffff;
-  color: #64b5f6;
-}
-
-/* Success Message */
-body.dark-theme .success-box {
-  background: #1e1e1e;
-}
-
-body.dark-theme .success-box h2 {
-  color: #4caf50;
-}
-
-/* Map Section */
-body.dark-theme .map-section {
-  background: #121212;
-  border: 2px solid #333;
-}
-
-/* Contact Banner */
-body.dark-theme .contact-banner {
-  background: linear-gradient(rgba(10, 10, 10, 0.8), rgba(10, 10, 10, 0.8)),
-              url("https://i.pinimg.com/1200x/73/31/76/7331766da00be72c7d80a04517193df6.jpg") center/cover no-repeat;
-  color: #fff;
-}
-
-body.dark-theme .contact-banner h2 {
-  color: #ffffff;
-}
-
-body.dark-theme .contact-banner p {
-  color: #dddddd;
-}
-
-body.dark-theme .contact-btn {
-  background: #64b5f6;
-  color: #ffffff;
-}
-
-body.dark-theme .contact-btn:hover {
-  background: #ffffff;
-  color: #64b5f6;
-}

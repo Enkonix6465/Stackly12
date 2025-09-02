@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import "./Header.css";
+import logo from "../images/logo.png";
 
 const Header = ({ toggleTheme, isDark }) => {
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [initials, setInitials] = useState("");
   const [avatarDropdownOpen, setAvatarDropdownOpen] = useState(false);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const [language, setLanguage] = useState(() => localStorage.getItem("app_language") || "en");
   const avatarRef = useRef(null);
 
   const navigate = useNavigate();
@@ -32,6 +34,70 @@ const Header = ({ toggleTheme, isDark }) => {
     window.addEventListener("storage", handleStorage);
     return () => window.removeEventListener("storage", handleStorage);
   }, [location.pathname]);
+
+  // language translations for header labels
+  const translations = {
+    en: {
+      home: "Home",
+      home2: "Home 2",
+      aboutUs: "About Us",
+      services: "Services",
+      cloud: "Cloud",
+      customerFirst: "Customer First",
+      cybersecurity: "Cybersecurity",
+      dataAi: "Data & AI",
+      enterpriseManagement: "Enterprise Management",
+      intelligentIndustry: "Intelligent Industry",
+      blog: "Blog",
+      contactUs: "Contact Us",
+      logout: "Logout",
+    },
+    he: {
+      home: "ראשי",
+      home2: "דף ראשי 2",
+      aboutUs: "עלינו",
+      services: "שירותים",
+      cloud: "ענן",
+      customerFirst: "לקוח תחילה",
+      cybersecurity: "אבטחת סייבר",
+      dataAi: "נתונים ובינה מלאכותית",
+      enterpriseManagement: "ניהול ארגוני",
+      intelligentIndustry: "תעשייה חכמה",
+      blog: "בלוג",
+      contactUs: "צור קשר",
+      logout: "התנתקות",
+    },
+    ar: {
+      home: "الصفحة الرئيسية",
+      home2: "الصفحة الرئيسية 2",
+      aboutUs: "من نحن",
+      services: "الخدمات",
+      cloud: "السحابة",
+      customerFirst: "العميل أولاً",
+      cybersecurity: "الأمن السيبراني",
+      dataAi: "البيانات والذكاء الاصطناعي",
+      enterpriseManagement: "إدارة المؤسسة",
+      intelligentIndustry: "الصناعة الذكية",
+      blog: "المدونة",
+      contactUs: "اتصل بنا",
+      logout: "تسجيل الخروج",
+    },
+  };
+
+  const t = (key) => {
+    const lang = translations[language] || translations.en;
+    return lang[key] || key;
+  };
+
+  // Apply RTL/LTR direction based on language
+  useEffect(() => {
+    const isRtl = language === "he" || language === "ar";
+    document.documentElement.setAttribute("dir", isRtl ? "rtl" : "ltr");
+    document.documentElement.setAttribute("lang", language);
+    localStorage.setItem("app_language", language);
+    // notify other parts of the app
+    window.dispatchEvent(new CustomEvent("languageChanged", { detail: { language } }));
+  }, [language]);
 
   // Close avatar dropdown on outside click
   useEffect(() => {
@@ -105,11 +171,18 @@ const Header = ({ toggleTheme, isDark }) => {
     setMobileNavOpen(prev => !prev);
   };
 
+  const handleLanguageChange = (e) => {
+    const next = e.target.value;
+    setLanguage(next);
+    // immediate broadcast (state effect will also broadcast, this ensures instant reaction)
+    window.dispatchEvent(new CustomEvent("languageChanged", { detail: { language: next } }));
+  };
+
   return (
     <header className="header">
       <nav className="logo">
         <Link to="/home">
-          <img src="/Images/stackly.png" alt="Logo" />
+          <img src={logo} alt="Logo" />
         </Link>
       </nav>
 
@@ -129,7 +202,7 @@ const Header = ({ toggleTheme, isDark }) => {
             className={`nav-link ${activeLink === "home" ? "active" : ""}`}
             onClick={() => handleMainClick("home")}
           >
-            Home
+            {t("home")}
           </span>
           <span
             className={`arrow ${activeDropdown === "home" ? "open" : ""}`}
@@ -139,8 +212,8 @@ const Header = ({ toggleTheme, isDark }) => {
           </span>
           {activeDropdown === "home" && (
             <div className="dropdown">
-              <Link to="/home" onClick={handleLinkClick}>Home</Link>
-              <Link to="/home2" onClick={handleLinkClick}>Home 2</Link>
+              <Link to="/home" onClick={handleLinkClick}>{t("home")}</Link>
+              <Link to="/home2" onClick={handleLinkClick}>{t("home2")}</Link>
             </div>
           )}
         </div>
@@ -150,7 +223,7 @@ const Header = ({ toggleTheme, isDark }) => {
           className={`nav-link ${activeLink === "about" ? "active" : ""}`}
           onClick={handleLinkClick}
         >
-          About Us
+          {t("aboutUs")}
         </Link>
 
         <div className="nav-item">
@@ -158,7 +231,7 @@ const Header = ({ toggleTheme, isDark }) => {
             className={`nav-link ${activeLink === "services" ? "active" : ""}`}
             onClick={() => handleMainClick("services")}
           >
-            Services
+            {t("services")}
           </span>
           <span
             className={`arrow ${activeDropdown === "services" ? "open" : ""}`}
@@ -168,12 +241,12 @@ const Header = ({ toggleTheme, isDark }) => {
           </span>
           {activeDropdown === "services" && (
             <div className="dropdown">
-              <Link to="/cloud" onClick={handleLinkClick}>Cloud</Link>
-              <Link to="/customer-first" onClick={handleLinkClick}>Customer First</Link>
-              <Link to="/cybersecurity" onClick={handleLinkClick}>Cybersecurity</Link>
-              <Link to="/data-ai" onClick={handleLinkClick}>Data & AI</Link>
-              <Link to="/enterprise-management" onClick={handleLinkClick}>Enterprise Management</Link>
-              <Link to="/intelligent-industry" onClick={handleLinkClick}>Intelligent Industry</Link>
+              <Link to="/cloud" onClick={handleLinkClick}>{t("cloud")}</Link>
+              <Link to="/CustomerFirst" onClick={handleLinkClick}>{t("customerFirst")}</Link>
+              <Link to="/cybersecurity" onClick={handleLinkClick}>{t("cybersecurity")}</Link>
+              <Link to="/DataAI" onClick={handleLinkClick}>{t("dataAi")}</Link>
+              <Link to="/EnterpriseManagement" onClick={handleLinkClick}>{t("enterpriseManagement")}</Link>
+              <Link to="/IntelligentIndustry" onClick={handleLinkClick}>{t("intelligentIndustry")}</Link>
             </div>
           )}
         </div>
@@ -183,7 +256,7 @@ const Header = ({ toggleTheme, isDark }) => {
           className={`nav-link ${activeLink === "blog" ? "active" : ""}`}
           onClick={handleLinkClick}
         >
-          Blog
+          {t("blog")}
         </Link>
 
         <Link
@@ -191,11 +264,22 @@ const Header = ({ toggleTheme, isDark }) => {
           className={`nav-link ${activeLink === "contact" ? "active" : ""}`}
           onClick={handleLinkClick}
         >
-          Contact Us
+          {t("contactUs")}
         </Link>
       </nav>
 
       <div className="rightSection">
+        <select
+          aria-label="Select language"
+          value={language}
+          onChange={handleLanguageChange}
+          className="languageSelect"
+          style={{ marginRight: "8px" }}
+        >
+          <option value="en">English</option>
+          <option value="he">עברית</option>
+          <option value="ar">العربية</option>
+        </select>
         <button className="themeToggle" onClick={toggleTheme}>
           {isDark ? "🌙" : "🌞"}
         </button>
@@ -237,7 +321,7 @@ const Header = ({ toggleTheme, isDark }) => {
                   fontSize: "14px",
                 }}
               >
-                Logout
+                {t("logout")}
               </button>
             </div>
           )}

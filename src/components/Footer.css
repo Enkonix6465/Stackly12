@@ -1,6 +1,6 @@
 .footer {
-  background-color: #000000;
-  color: #ffffff;
+  background-color: #ffffff;
+  color: #000000;
   padding: 50px 20px 20px;
   font-family: 'Segoe UI', sans-serif;
 }
@@ -29,13 +29,13 @@
 
 .footer-description {
   font-size: 14px;
-  color: #cfd8dc;
+  color: #000000;
 }
 
 .footer-section h4 {
   font-size: 16px;
   margin-bottom: 10px;
-  color: #ffffff;
+  color: #000000;
 }
 
 .footer-section ul {
@@ -49,7 +49,7 @@
 }
 
 .footer-section ul li a {
-  color: #cfd8dc;
+  color: #000000;
   text-decoration: none;
   transition: color 0.3s;
 }
@@ -61,7 +61,7 @@
 .footer-social a {
   margin-right: 10px;
   font-size: 20px;
-  color: #cfd8dc;
+  color: #ffffff;
   text-decoration: none;
   transition: color 0.3s;
 }
@@ -72,7 +72,7 @@
 
 .footer-contact {
   font-size: 14px;
-  color: #cfd8dc;
+  color: #000000;
   margin-top: 10px;
 }
 
@@ -80,8 +80,8 @@
   position: relative;
   text-align: center;
   padding: 10px 20px;
-  color: #ccc;
-  background-color: #000000;
+  color: #000000;
+  background-color: #ffffff;
 }
 
 /* Scroll to top button positioned at bottom-right corner */
@@ -166,3 +166,60 @@
     padding: 0; /* Remove extra padding for mobile */
   }
 }
+/* Existing Light Theme Footer CSS */
+/* ... your existing styles ... */
+
+/* Dark Theme Support */
+[data-theme="dark"] .footer {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+[data-theme="dark"] .footer-container {
+  /* no change needed, inherits from footer */
+}
+
+[data-theme="dark"] .footer-section {
+  border-color: transparent; /* Remove any borders if needed */
+  color: #e0e0e0;
+}
+
+[data-theme="dark"] .footer-section h4 {
+  color: #64b5f6; /* lighter blue for headings */
+}
+
+[data-theme="dark"] .footer-description,
+[data-theme="dark"] .footer-contact {
+  color: #ffffff; /* soft light blue-gray */
+}
+
+[data-theme="dark"] .footer-section ul li a {
+  color: #ffffff; /* light blue links */
+}
+
+[data-theme="dark"] .footer-section ul li a:hover {
+  color: #ffffff; /* lighter hover color */
+}
+
+[data-theme="dark"] .footer-social a {
+  color: #ffffff;
+}
+
+[data-theme="dark"] .footer-social a:hover {
+  color: #ffffff;
+}
+
+[data-theme="dark"] .footer-bottom {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+[data-theme="dark"] .scroll-to-top {
+  background-color: #64b5f6;
+  color: #121212;
+}
+
+[data-theme="dark"] .scroll-to-top:hover {
+  background-color: #42a5f5;
+}
+

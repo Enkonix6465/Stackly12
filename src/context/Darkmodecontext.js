@@ -1,28 +1,34 @@
-// ThemeContext.js
-import React, { createContext, useState, useEffect, useContext } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
-const ThemeContext = createContext();
+// Create context
+export const DarkModeContext = createContext();
 
-export const Darkmodecontext = ({ children }) => {
-  const [theme, setTheme] = useState(() => {
-    // Check if user has a saved preference in localStorage
-    return localStorage.getItem("theme") || "light";
+// Provider
+export const DarkModeProvider = ({ children }) => {
+  const [darkMode, setDarkMode] = useState(() => {
+    // ✅ Load from localStorage on first render
+    const savedTheme = localStorage.getItem("darkMode");
+    return savedTheme ? JSON.parse(savedTheme) : false;
   });
 
   useEffect(() => {
-    localStorage.setItem("theme", theme);
-    document.documentElement.setAttribute("data-theme", theme);
-  }, [theme]);
+    // ✅ Save to localStorage whenever it changes
+    localStorage.setItem("darkMode", JSON.stringify(darkMode));
 
-  const toggleTheme = () => {
-    setTheme((curr) => (curr === "light" ? "dark" : "light"));
+    // ✅ Set data-theme attribute on HTML tag for global theming
+    document.documentElement.setAttribute("data-theme", darkMode ? "dark" : "light");
+  }, [darkMode]);
+
+  const toggleDarkMode = () => {
+    setDarkMode((prev) => !prev);
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <DarkModeContext.Provider value={{ darkMode, toggleDarkMode }}>
       {children}
-    </ThemeContext.Provider>
+    </DarkModeContext.Provider>
   );
 };
 
-export const useDarkMode = () => useContext(ThemeContext);
+// Custom hook
+export const useDarkMode = () => useContext(DarkModeContext);
